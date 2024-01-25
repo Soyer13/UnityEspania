@@ -42,11 +42,20 @@ public class RigidbodyController : MonoBehaviour
 
         rb.AddForce(x, 0f, y, ForceMode.Impulse);
     }
+    /*
     private void OnTriggerEnter(Collider other)
     {
         isGround = true;
     }
     private void OnTriggerExit(Collider other)
+    {
+        isGround = false;
+    }*/
+    private void OnCollisionEnter(Collision collision)
+    {
+        isGround = true;
+    }
+    private void OnCollisionExit(Collision collision)
     {
         isGround = false;
     }
