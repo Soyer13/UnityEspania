@@ -37,6 +37,10 @@ public class RigidbodyController : MonoBehaviour
 
             }
         }
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+
+        rb.AddForce(x, 0f, y, ForceMode.Impulse);
     }
     private void OnTriggerEnter(Collider other)
     {
