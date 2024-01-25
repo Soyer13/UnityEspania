@@ -5,12 +5,14 @@ using UnityEngine;
 public class RigidbodyController : MonoBehaviour
 {
     private Rigidbody rb;
-
+    private BoxCollider colider;
     public KeyCode JumpKey;
+    private bool isGround;
     // Start is called before the first frame update
     void Start()
     {
         //rb = GetComponent<Rigidbody>();
+        colider = GetComponent<BoxCollider>();
         if(TryGetComponent(out Rigidbody rbNow))
         {
             rb = rbNow;
@@ -25,10 +27,23 @@ public class RigidbodyController : MonoBehaviour
     void FixedUpdate()
     {
         //Input.GetButtonDown("Jump");
-        if(Input.GetKey(JumpKey))
+        
+        if(isGround == true)
         {
-            rb.AddForce(0f, 1f, 0f,ForceMode.Impulse);
 
+            if(Input.GetKey(JumpKey))
+            {
+                rb.AddForce(0f, 1f, 0f,ForceMode.Impulse);
+
+            }
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        isGround = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        isGround = false;
     }
 }
