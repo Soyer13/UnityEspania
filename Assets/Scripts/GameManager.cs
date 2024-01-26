@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float FinishTime;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI Timmer;
     [SerializeField] TextMeshProUGUI EndGameComunicat;
     [SerializeField] GameObject Coin;
 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
             {
                 time = time + Time.deltaTime ;
                 inttime = (int)time;
-                text.text = inttime.ToString();    
+                Timmer.text = inttime.ToString();    
             }
         
             if(time >= FinishTime) {

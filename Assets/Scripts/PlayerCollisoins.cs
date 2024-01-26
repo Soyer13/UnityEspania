@@ -9,7 +9,7 @@ public class PlayerCollisoins : MonoBehaviour
 {
     // Start is called before the first frame update
     private int counter;
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI Score;
     [SerializeField] GameObject particleEffect;
     [SerializeField] ParticleSystem Particle;
     
@@ -27,7 +27,7 @@ public class PlayerCollisoins : MonoBehaviour
             Debug.Log(other.gameObject.name);
             Destroy(other.gameObject);
             counter++;
-            text.text = counter.ToString();
+            Score.text = counter.ToString();
             //Instantiate(particleEffect,other.transform.position,Quaternion.identity);
             particleEffect.transform.position = other.transform.position;
             particleEffect.SetActive(true);
