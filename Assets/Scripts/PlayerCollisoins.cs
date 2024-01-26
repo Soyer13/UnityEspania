@@ -19,7 +19,12 @@ public class PlayerCollisoins : MonoBehaviour
         Particle = particleEffect.GetComponent<ParticleSystem>();
         particleEffect.SetActive(false);
     }
-
+    //IEnumerator Start()
+    void Start()
+    {
+        //yield return null;
+        StartCoroutine(GameManager.instance.CourutineTest());
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "COIN")
@@ -32,7 +37,10 @@ public class PlayerCollisoins : MonoBehaviour
             particleEffect.transform.position = other.transform.position;
             particleEffect.SetActive(true);
             Particle.Play();
+            AudioManager.instance.PlaySFX(0);
             GameManager.instance.CoinsColleted++;
         }
     }
+
+    
 }

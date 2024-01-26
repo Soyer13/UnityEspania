@@ -78,4 +78,13 @@ public class GameManager : MonoBehaviour
             Instantiate(Coin, allCoins[i].transform.position, Quaternion.identity);
         }
     }
+
+    public IEnumerator CourutineTest()
+    {
+        yield return new WaitForSeconds(1);
+        /*while (true)
+        {
+            yield return null;
+        }*/
+    }
 }
