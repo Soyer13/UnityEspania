@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI Timmer;
     [SerializeField] TextMeshProUGUI EndGameComunicat;
     [SerializeField] GameObject Coin;
-    [SerializeField] GameObject Player;
+    public GameObject Player;
+    public Transform PlayerCameraPosition;
 
     //public Transform[] coinPosition;
 
