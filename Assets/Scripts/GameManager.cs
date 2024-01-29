@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI Timmer;
     [SerializeField] TextMeshProUGUI EndGameComunicat;
     [SerializeField] GameObject Coin;
+    [SerializeField] GameObject Player;
 
     //public Transform[] coinPosition;
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        loadPlayerPositoion();
          //allCoins = GameObject.FindGameObjectsWithTag("COIN");
         allCoins = GameObject.FindGameObjectsWithTag("spawnpos");
         loadCoins();
@@ -86,5 +88,23 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }*/
+    }
+
+    public void savePlayerPosition()
+    {
+        PlayerPrefs.SetFloat("PlayerX", Player.transform.position.x);
+        PlayerPrefs.SetFloat("PlayerY", Player.transform.position.y);
+        PlayerPrefs.SetFloat("PlayerZ", Player.transform.position.z);
+        PlayerPrefs.Save();
+        Debug.Log(Player.transform.position.x + " , " + Player.transform.position.y + " , " + Player.transform.position.z);
+    }
+    public void loadPlayerPositoion()
+    {
+        float PlayerX = PlayerPrefs.GetFloat("PlayerX");
+        float PlayerY = PlayerPrefs.GetFloat("PlayerY");
+        float PlayerZ = PlayerPrefs.GetFloat("PlayerZ");
+        Debug.Log(PlayerX+ " "+ PlayerY + " " + PlayerZ);
+        //Player.transform.position = new Vector3(PlayerX, PlayerY, PlayerZ);
+        Player.transform.SetPositionAndRotation(new Vector3(PlayerX, PlayerY, PlayerZ), Quaternion.identity);
     }
 }
