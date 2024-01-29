@@ -10,7 +10,9 @@ public class EnemyBehaivior : MonoBehaviour
     [SerializeField] float distanceCheck;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletspawnpoint;
+    [SerializeField] GameObject[] wanderingPoints;
     private bool ishooot = true;
+    private bool isWandering = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,15 +23,20 @@ public class EnemyBehaivior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Player);
+        
         if(Vector3.Distance(transform.position, Player.position)< distanceCheck)
         {
+            transform.LookAt(Player);
             //transform.position += transform.forward * EnemySpeed * 3 * Time.deltaTime;
             if(ishooot)
             {
 
                 StartCoroutine(shoot());
             }
+        }
+        else if(isWandering)
+        {
+            enemyWander();
         }
     }
 
@@ -41,5 +48,22 @@ public class EnemyBehaivior : MonoBehaviour
         yield return new WaitForSeconds(2);
         ishooot = true;
 
+    }
+
+    IEnumerator enemyWander() {
+        isWandering = false;
+        int movePoint = Random.Range(0, wanderingPoints.Length);
+        if(this.transform.position != wanderingPoints[movePoint].transform.position)
+        {
+            Debug.Log("Move to " + movePoint);
+            transform.LookAt(wanderingPoints[movePoint].transform.position);
+            transform.position += transform.forward * EnemySpeed * Time.deltaTime;
+        }
+        else
+        {
+            isWandering = true;
+        }
+        yield return new WaitForSeconds(50);
+        isWandering = true;
     }
 }
