@@ -11,13 +11,17 @@ public class EnemyBehaivior : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletspawnpoint;
     [SerializeField] GameObject[] wanderingPoints;
+
+    //public EnemySO Enemy;
+
     private bool ishooot = true;
     private bool isWandering = true;
     // Start is called before the first frame update
     void Start()
     {
         //Player = GameObject.FindGameObjectWithTag("Player").transform;
-        
+
+        //EnemySpeed = Enemy.Speed;
     }
 
     // Update is called once per frame
@@ -34,9 +38,14 @@ public class EnemyBehaivior : MonoBehaviour
                 StartCoroutine(shoot());
             }
         }
-        else if(isWandering)
+        else 
         {
-            enemyWander();
+            
+            if(isWandering)
+            {
+                StartCoroutine(enemyWander());
+
+            }
         }
     }
 
@@ -53,6 +62,7 @@ public class EnemyBehaivior : MonoBehaviour
     IEnumerator enemyWander() {
         isWandering = false;
         int movePoint = Random.Range(0, wanderingPoints.Length);
+        /*
         if(this.transform.position != wanderingPoints[movePoint].transform.position)
         {
             Debug.Log("Move to " + movePoint);
@@ -63,7 +73,19 @@ public class EnemyBehaivior : MonoBehaviour
         {
             isWandering = true;
         }
-        yield return new WaitForSeconds(50);
+        
+         while(this.transform.position != wanderingPoints[movePoint].transform.position)
+        {
+            
+            transform.position += transform.forward * EnemySpeed * Time.deltaTime;
+            yield return null;
+        }
+         
+         */
+        Debug.Log("Move to " + movePoint);
+        transform.LookAt(wanderingPoints[movePoint].transform.position);
+        transform.position += transform.forward * EnemySpeed * Time.deltaTime;
+        yield return new WaitForSeconds(5);
         isWandering = true;
     }
 }
